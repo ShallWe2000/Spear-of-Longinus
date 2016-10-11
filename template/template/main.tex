@@ -18,21 +18,23 @@
 \usepackage{enumerate}
 \usepackage{indentfirst}
 \usepackage[cache=false]{minted}
-
+\usepackage{fontspec}
 %代码高亮
 \geometry{margin=1in}
-
+\setmonofont{Consolas}
 %字体设置
-\setmainfont{SimSun}
+\setmainfont{Consolas}
 \setCJKmonofont{SimSun}
 \setCJKmainfont[BoldFont={SimSun}]{SimSun}
 
 \newcommand{\cppcode}[1]{
-    \inputminted[mathescape]{cpp}{source/#1}
+    \inputminted[mathescape,
+    frame=lines,linenos]{cpp}{source/#1}
 }
 
 \newcommand{\javacode}[1]{
-    \inputminted[mathescape]{java}{source/#1}
+    \inputminted[mathescape,
+    frame=lines,linenos]{java}{source/#1}
 }
 
 \title{代码库}
@@ -45,7 +47,7 @@
 
 \tableofcontents
 
-\clearpage
+\newpage
 
 \section{数论}
 
@@ -58,6 +60,7 @@
 
 \subsection{扩展欧几里德算法}
 
+
 返回结果：$$ax+by=gcd(a,b)$$
 \indent 时间复杂度：$\mathcal{O}(nlogn)$
 
@@ -66,10 +69,31 @@
 \subsection{中国剩余定理}
 
 返回结果：$$x \equiv r_i (mod \ p_i) \ (0 \leq i < n)$$
-\indent 使用条件：$p_i$无需两两互质\\
-\indent 时间复杂度：$\mathcal{O}(nlogn)$
+\indent 使用条件：$p_i$需两两互质\\
+%\indent 时间复杂度：$\mathcal{O}(nlogn)$
 
 \cppcode{number-theory/chinese-remainder-theorem.cpp}
+
+\subsection{中国剩余定理2}
+
+\cppcode{number-theory/china2.cpp}
+
+\subsection{组合数取模}
+\cppcode{number-theory/CnmmodP.cpp}
+
+\subsection{扩展小步大步}
+\cppcode{number-theory/exBSGS.cpp}
+
+\subsection{卢卡斯定理}
+\cppcode{number-theory/Lucas.cpp}
+
+\subsection{小步大步}
+
+返回结果：$$a^x=b \ (mod \ p)$$
+\indent 使用条件：$p$为质数\\
+\indent 时间复杂度：$\mathcal{O}(\sqrt{n})$
+
+\cppcode{number-theory/BSGS.cpp}
 
 \subsection{Miller Rabin 素数测试}
 
@@ -81,15 +105,25 @@
 
 \cppcode{number-theory/pollard-rho.cpp}
 
-\subsection{快速数论变换}
 
+
+\subsection{快速数论变换(zky)}
 返回结果：$$c_i=\sum_{0 \leq j \leq i} a_j \cdot b_{i-j} (mod) \ (0 \leq i < n)$$
 \indent 使用说明：$magic$是$mod$的原根\\
 \indent 时间复杂度：$\mathcal{O}(n log n)$
-
 \cppcode{number-theory/number-theoretic-transform.cpp}
 
-%\subsection{原根}
+\subsection{快速数论变换(lyx)}
+\cppcode{number-theory/DFT.cpp}
+
+\subsection{原根}
+\cppcode{number-theory/primeroot.cpp}
+
+\subsection{线性递推}
+\cppcode{number-theory/linear-recurrence.cpp}
+
+\subsection{线性筛}
+\cppcode{number-theory/linear-sieve.cpp}
 
 %\subsection{离散对数}
 
@@ -107,7 +141,8 @@
 
 \section{数值}
 
-%\subsection{高斯消元}
+\subsection{高斯消元}
+\cppcode{numerical-algorithm/Gauss.cpp}
 
 \subsection{快速傅立叶变换}
 
@@ -126,6 +161,11 @@
 
 \cppcode{numerical-algorithm/adaptive-simpson.cpp}
 
+
+\subsection{多项式求根}
+
+\cppcode{numerical-algorithm/polyroot.cpp}
+
 %\subsection{牛顿迭代法}
 
 %\subsection{多项式方程求解}
@@ -138,50 +178,75 @@
 
 \subsubsection{Treap}
 
-\cppcode{data-structure/treap.cpp}
+\cppcode{data-structure/Treap.cpp}
 
 \subsubsection{Splay}
 
-\cppcode{data-structure/splay.cpp}
+\cppcode{data-structure/Splay.cpp}
 
 \subsection{坚固的数据结构}
 
-\subsubsection{坚固的线段树}
+%\subsubsection{坚固的线段树}
 
-\cppcode{data-structure/persistent-segment-tree.cpp}
+%\cppcode{data-structure/persistent-segment-tree.cpp}
 
 \subsubsection{坚固的平衡树}
 
-\cppcode{data-structure/persistent-treap.cpp}
+\cppcode{data-structure/fhqTreap.cpp}
 
 \subsubsection{坚固的字符串}
 
 \begin{enumerate}
 	\item ext库中的rope
-		\cppcode{data-structure/crope.cpp}
+	\cppcode{data-structure/crope.cpp}
 	\item 可持久化平衡树实现的rope
-		\cppcode{data-structure/rope.cpp}
+	\cppcode{data-structure/rope.cpp}
 \end{enumerate}
 
 \subsubsection{坚固的左偏树}
+\cppcode{data-structure/lefttree.cpp}
 
-\cppcode{data-structure/persistent-leftist-tree.cpp}
+\subsubsection{不坚固的斜堆}
+\cppcode{data-structure/SkewHeap.cpp}
 
 \subsection{树上的魔术师}
 
-\subsubsection{轻重树链剖分}
+\subsubsection{轻重树链剖分(zky)}
+\cppcode{data-structure/HLD.cpp}
 
-\cppcode{data-structure/heavy-light-decomposition.cpp}
+\subsubsection{轻重树链剖分(lyx)}
+\cppcode{data-structure/tree-chain.cpp}
 
-\subsubsection{Link Cut Tree}
+\subsubsection{Link Cut Tree(zky)}
+\cppcode{data-structure/LCT.cpp}
 
-\cppcode{data-structure/link-cut-tree.cpp}
+\subsubsection{Link Cut Tree(lyx)}
+\cppcode{data-structure/Link-cut-tree.cpp}
 
-%\subsubsection{AAA Tree}
+\subsubsection{AAA Tree}
+\cppcode{data-structure/toptree.cpp}
+
+\subsection{ST}
+\cppcode{data-structure/Rmq.cpp}
+
+\subsection{可持久化线段树}
+\cppcode{data-structure/ChairTree.cpp}
+
+\subsection{可持久化Trie}
+\cppcode{data-structure/ChairTrie.cpp}
 
 \subsection{k-d树}
-
 \cppcode{data-structure/kd-tree.cpp}
+
+
+\subsection{必经点树}
+\cppcode{data-structure/dominator-tree.cpp}
+
+\subsection{莫队算法}
+\cppcode{data-structure/mo-team.cpp}
+
+\subsection{整体二分}
+\cppcode{data-structure/binary-search.cpp}
 
 \section{图论}
 
@@ -191,7 +256,8 @@
 
 %\subsection{双连通分量}
 
-%\subsubsection{点双连通分量}
+\subsubsection{点双连通分量}
+\cppcode{graph-theory/point-two.cpp}
 
 %\subsubsection{边双连通分量}
 
@@ -205,13 +271,13 @@
 
 时间复杂度：$\mathcal{O}(V \cdot E)$
 
-\cppcode{graph-theory/maximum-matching-hungary.cpp}
+\cppcode{graph-theory/Hungarian.cpp}
 
 \subsubsection{Hopcroft Karp算法}
 
 时间复杂度：$\mathcal{O}(\sqrt{V} \cdot E)$
 
-\cppcode{graph-theory/maximum-matching-hopcroft-karp.cpp}
+\cppcode{graph-theory/HK.cpp}
 
 \subsection{二分图最大权匹配}
 
@@ -219,16 +285,20 @@
 
 \cppcode{graph-theory/maximum-weight-matching.cpp}
 
-\subsection{最大流}
-
+\subsection{最大流(dinic)}
 时间复杂度：$\mathcal{O}(V^2 \cdot E)$
+\cppcode{graph-theory/dinic.cpp}
 
-\cppcode{graph-theory/maximum-flow.cpp}
+
+\subsection{最大流(sap)}
+时间复杂度：$\mathcal{O}(V^2 \cdot E)$
+\cppcode{graph-theory/Sap.cpp}
+
 
 \subsection{上下界网络流}
 
 $B(u,v)$表示边$(u,v)$流量的下界，$C(u,v)$表示边$(u,v)$流量的上界，$F(u,v)$表示边$(u,v)$的流量。设$G(u,v) = F(u,v) - B(u,v)$，显然有
-	$$0 \leq G(u,v) \leq C(u,v)-B(u,v)$$
+$$0 \leq G(u,v) \leq C(u,v)-B(u,v)$$
 
 \subsubsection{无源汇的上下界可行流}
 
@@ -304,47 +374,58 @@ ORE性质：$$\forall x,y \in V \wedge (x,y) \notin E \ \ s.t. \ \ deg_x+deg_y \
 
 \cppcode{graph-theory/hamiltonian-circuit-ore.cpp}
 
+
 \section{字符串}
 
 \subsection{模式匹配}
 
 \subsubsection{KMP算法}
 
-\cppcode{string-manipulation/knuth-morris-pratt.cpp}
+\cppcode{string-manipulation/KMP.cpp}
 
 \subsubsection{扩展KMP算法}
 
 返回结果：$$next_i = lcp(text, text_{i \dots n-1})$$
 
-\cppcode{string-manipulation/extended-knuth-morris-pratt.cpp}
+\cppcode{string-manipulation/ExtKMP.cpp}
 
 \subsubsection{AC自动机}
 
-\cppcode{string-manipulation/aho-corasick-automation.cpp}
+\cppcode{string-manipulation/ACmachine.cpp}
 
 \subsection{后缀三姐妹}
 
 \subsubsection{后缀数组}
 
-\cppcode{string-manipulation/suffix-array.cpp}
+\cppcode{string-manipulation/Sa.cpp}
 
-\subsubsection{后缀自动机}
+\subsubsection{后缀数组(dc3)}
+\cppcode{string-manipulation/DC3.cpp}
 
-\cppcode{string-manipulation/suffix-automation.cpp}
+\subsubsection{后缀自动机-多串LCS}
+\indent 对一个串建后缀自动机，其他串在上面匹配，因为是求所有串的公共子串，所以每个点记录每个串最长匹配长度的最小值，最后找到所有点中最长的一个即可。一个注意事项就是，当走到一个点时，还要更新它的parent树上的祖先的匹配长度,数组开两倍啦啦啦!
+\cppcode{string-manipulation/Sam-LCS.cpp}
+\subsubsection{后缀自动机-各长度字串出现次数最大值}
+\indent 给一个字符串S，令F(x)表示S的所有长度为x的子串中，出现次数的最大值。
+\indent 构建字符串的自动机，对于每个节点，right集合大小就是出现次数，maxs就是它代表的最长长度，那么我们用|right(x)|去更新f[maxs[x]]的值，最后从大到小用f[i]去更新f[i-1]的值即可
+
+\cppcode{string-manipulation/Sam-max.cpp}
+\subsubsection{后缀自动机-两串LCS}
+\cppcode{string-manipulation/Sam-2LCS.cpp}
 
 \subsection{回文三兄弟}
+\subsubsection{马拉车}
+\cppcode{string-manipulation/Manacher.cpp}
+\subsubsection{回文树(lyx)}
+\cppcode{string-manipulation/PAMM.cpp}
+\subsubsection{回文自动机(zky)}
+\cppcode{string-manipulation/PAM.cpp}
 
-\subsubsection{Manacher算法}
 
-\cppcode{string-manipulation/manacher.cpp}
 
-\subsubsection{回文树}
-
-\cppcode{string-manipulation/palindrome-tree.cpp}
 
 \subsection{循环串最小表示}
-
-\cppcode{string-manipulation/minimum-circular-representation.cpp}
+\cppcode{string-manipulation/minexpress.cpp}
 
 \section{计算几何}
 
@@ -358,11 +439,14 @@ ORE性质：$$\forall x,y \in V \wedge (x,y) \notin E \ \ s.t. \ \ deg_x+deg_y \
 
 \cppcode{computational-geometry/convex-hull.cpp}
 
-%\subsubsection{半平面交}
+\subsubsection{半平面交}
+\cppcode{computational-geometry/halfplaneintersection.cpp}
 
 \subsubsection{最近点对}
-
 \cppcode{computational-geometry/closest-pair-of-points.cpp}
+
+\subsubsection{最小圆覆盖}
+\cppcode{computational-geometry/mincir.cpp}
 
 %\subsection{三维基础}
 
@@ -377,6 +461,8 @@ ORE性质：$$\forall x,y \in V \wedge (x,y) \notin E \ \ s.t. \ \ deg_x+deg_y \
 \subsubsection{判断点在多边形内部}
 
 \cppcode{computational-geometry/point-in-polygon.cpp}
+
+
 
 %\subsubsection{旋转卡壳}
 
@@ -422,6 +508,19 @@ ORE性质：$$\forall x,y \in V \wedge (x,y) \notin E \ \ s.t. \ \ deg_x+deg_y \
 
 \section{其他}
 
+\subsection{斯坦那树}
+\cppcode{miscellany/Steiner-Tree.cpp}
+
+\subsection{最小树形图}
+\cppcode{miscellany/mintreegraph.cpp}
+
+\subsection{DLX}
+\cppcode{miscellany/DLX.cpp}
+
+\subsection{插头DP}
+\cppcode{miscellany/plugdp.cpp}
+
+
 \subsection{某年某月某日是星期几}
 
 \cppcode{miscellany/what-day-is-today.cpp}
@@ -435,6 +534,10 @@ ORE性质：$$\forall x,y \in V \wedge (x,y) \notin E \ \ s.t. \ \ deg_x+deg_y \
 \subsection{环状最长公共子串}
 
 \cppcode{miscellany/cyclic-longest-common-string.cpp}
+
+\subsection{LLMOD}
+
+\cppcode{miscellany/LLMOD.cpp}
 
 %\subsection{搜索}
 
@@ -490,20 +593,20 @@ ORE性质：$$\forall x,y \in V \wedge (x,y) \notin E \ \ s.t. \ \ deg_x+deg_y \
 \subsubsection{莫比乌斯函数}
 
 $$\mu(n) = \begin{cases}
-	1 & \text{若}n=1\\
-	(-1)^k & \text{若}n\text{无平方数因子，且}n = p_1p_2\dots p_k\\
-	0 & \text{若}n\text{有大于}1\text{的平方数因数}
+1 & \text{若}n=1\\
+(-1)^k & \text{若}n\text{无平方数因子，且}n = p_1p_2\dots p_k\\
+0 & \text{若}n\text{有大于}1\text{的平方数因数}
 \end{cases}$$
 $$\sum_{d|n}{\mu(d)} = \begin{cases}
-	1 & \text{若}n=1\\
-	0 & \text{其他情况}
+1 & \text{若}n=1\\
+0 & \text{其他情况}
 \end{cases}$$
 $$g(n) = \sum_{d|n}{f(d)} \Leftrightarrow f(n) = \sum_{d|n}{\mu(d)g(\frac{n}{d})}$$
 $$g(x) = \sum_{n=1}^{[x]}f(\frac{x}{n}) \Leftrightarrow f(x) = \sum_{n=1}^{[x]}{\mu(n)g(\frac{x}{n})}$$
 
 \subsubsection{伯恩赛德引理}
 设$G$是一个有限群，作用在集合$X$上。对每个$g$属于$G$，令$X^g$表示$X$中在$g$作用下的不动元素，轨道数（记作$|X/G|$）由如下公式给出：
-	$$|X/G| = \frac{1}{|G|}\sum_{g \in G}|X^g|.\,$$
+$$|X/G| = \frac{1}{|G|}\sum_{g \in G}|X^g|.\,$$
 
 \subsubsection{五边形数定理}
 
@@ -513,29 +616,29 @@ $$g(x) = \sum_{n=1}^{[x]}f(\frac{x}{n}) \Leftrightarrow f(x) = \sum_{n=1}^{[x]}{
 
 \begin{enumerate}
 	\item 有根树计数：$n+1$个结点的有根树的个数为
-		$$a_{n+1} = \frac{\sum_{j=1}^{n}{j \cdot a_j \cdot{S_{n, j}}}}{n}$$
+	$$a_{n+1} = \frac{\sum_{j=1}^{n}{j \cdot a_j \cdot{S_{n, j}}}}{n}$$
 	其中，
-		$$S_{n, j} = \sum_{i=1}^{n/j}{a_{n+1-ij}} = S_{n-j, j} + a_{n+1-j}$$
+	$$S_{n, j} = \sum_{i=1}^{n/j}{a_{n+1-ij}} = S_{n-j, j} + a_{n+1-j}$$
 	\item 无根树计数：当$n$为奇数时，$n$个结点的无根树的个数为
-		$$a_n-\sum_{i=1}^{n/2}{a_ia_{n-i}}$$
+	$$a_n-\sum_{i=1}^{n/2}{a_ia_{n-i}}$$
 	当$n$为偶数时，$n$个结点的无根树的个数为
-		$$a_n-\sum_{i=1}^{n/2}{a_ia_{n-i}}+\frac{1}{2}a_{\frac{n}{2}}(a_{\frac{n}{2}}+1)$$
+	$$a_n-\sum_{i=1}^{n/2}{a_ia_{n-i}}+\frac{1}{2}a_{\frac{n}{2}}(a_{\frac{n}{2}}+1)$$
 	\item $n$个结点的完全图的生成树个数为
-		$$n^{n-2}$$
+	$$n^{n-2}$$
 	\item 矩阵－树定理：图$G$由$n$个结点构成，设$\bm{A}[G]$为图$G$的邻接矩阵、$\bm{D}[G]$为图$G$的度数矩阵，则图$G$的不同生成树的个数为$\bm{C}[G] = \bm{D}[G] - \bm{A}[G]$的任意一个$n-1$阶主子式的行列式值。
 \end{enumerate}
 
 \subsubsection{欧拉公式}
 
 平面图的顶点个数、边数和面的个数有如下关系：
-	$$V - E + F = C+ 1$$
+$$V - E + F = C+ 1$$
 \indent 其中，$V$是顶点的数目，$E$是边的数目，$F$是面的数目，$C$是组成图形的连通部分的数目。当图是单连通图的时候，公式简化为：
-	$$V - E + F = 2$$
+$$V - E + F = 2$$
 
 \subsubsection{皮克定理}
 
 给定顶点坐标均是整点（或正方形格点）的简单多边形，其面积$A$和内部格点数目$i$、边上格点数目$b$的关系：
-	$$A = i + \frac{b}{2} - 1$$
+$$A = i + \frac{b}{2} - 1$$
 
 \subsubsection{牛顿恒等式}
 
@@ -554,22 +657,22 @@ $$p_k = \sum_{i = 1}^n{x_i^k}$$
 
 \begin{enumerate}
 	\item 半周长
-		$$p=\frac{a+b+c}{2}$$
+	$$p=\frac{a+b+c}{2}$$
 	\item 面积
-		$$S=\frac{a \cdot H_a}{2}=\frac{ab \cdot sinC}{2}=\sqrt{p(p-a)(p-b)(p-c)}$$
+	$$S=\frac{a \cdot H_a}{2}=\frac{ab \cdot sinC}{2}=\sqrt{p(p-a)(p-b)(p-c)}$$
 	\item 中线
-		$$M_a=\frac{\sqrt{2(b^2+c^2)-a^2}}{2}=\frac{\sqrt{b^2+c^2+2bc \cdot cosA}}{2}$$
+	$$M_a=\frac{\sqrt{2(b^2+c^2)-a^2}}{2}=\frac{\sqrt{b^2+c^2+2bc \cdot cosA}}{2}$$
 	\item 角平分线 
-		$$T_a=\frac{\sqrt{bc \cdot [(b+c)^2-a^2]}}{b+c}=\frac{2bc}{b+c}cos\frac{A}{2}$$
+	$$T_a=\frac{\sqrt{bc \cdot [(b+c)^2-a^2]}}{b+c}=\frac{2bc}{b+c}cos\frac{A}{2}$$
 	\item 高线
-		$$H_a=bsinC=csinB=\sqrt{b^2-(\frac{a^2+b^2-c^2}{2a})^2}$$
+	$$H_a=bsinC=csinB=\sqrt{b^2-(\frac{a^2+b^2-c^2}{2a})^2}$$
 	\item 内切圆半径
-		\begin{align*}
-			r&=\frac{S}{p}=\frac{arcsin\frac{B}{2} \cdot sin\frac{C}{2}}{sin\frac{B+C}{2}}=4R \cdot sin\frac{A}{2}sin\frac{B}{2}sin\frac{C}{2}\\
-			&=\sqrt{\frac{(p-a)(p-b)(p-c)}{p}}=p \cdot tan\frac{A}{2}tan\frac{B}{2}tan\frac{C}{2}
-		\end{align*}
+	\begin{align*}
+	r&=\frac{S}{p}=\frac{arcsin\frac{B}{2} \cdot sin\frac{C}{2}}{sin\frac{B+C}{2}}=4R \cdot sin\frac{A}{2}sin\frac{B}{2}sin\frac{C}{2}\\
+	&=\sqrt{\frac{(p-a)(p-b)(p-c)}{p}}=p \cdot tan\frac{A}{2}tan\frac{B}{2}tan\frac{C}{2}
+	\end{align*}
 	\item 外接圆半径
-		$$R=\frac{abc}{4S}=\frac{a}{2sinA}=\frac{b}{2sinB}=\frac{c}{2sinC}$$
+	$$R=\frac{abc}{4S}=\frac{a}{2sinA}=\frac{b}{2sinB}=\frac{c}{2sinC}$$
 \end{enumerate}
 
 \subsubsection{四边形}
@@ -579,9 +682,9 @@ $D_1, D_2$为对角线，$M$对角线中点连线，$A$为对角线夹角，$p$�
 	\item $a^2+b^2+c^2+d^2=D_1^2+D_2^2+4M^2$
 	\item $S=\frac{1}{2}D_1D_2sinA$
 	\item 对于圆内接四边形
-		$$ac+bd=D_1D_2$$
+	$$ac+bd=D_1D_2$$
 	\item 对于圆内接四边形
-		$$S=\sqrt{(p-a)(p-b)(p-c)(p-d)}$$
+	$$S=\sqrt{(p-a)(p-b)(p-c)(p-d)}$$
 \end{enumerate}
 
 \subsubsection{正$n$边形}
@@ -589,134 +692,134 @@ $D_1, D_2$为对角线，$M$对角线中点连线，$A$为对角线夹角，$p$�
 $R$为外接圆半径，$r$为内切圆半径
 \begin{enumerate}
 	\item 中心角
-		$$A=\frac{2\pi}{n}$$
+	$$A=\frac{2\pi}{n}$$
 	\item 内角
-		$$C=\frac{n-2}{n}\pi$$
+	$$C=\frac{n-2}{n}\pi$$
 	\item 边长
-		$$a=2\sqrt{R^2-r^2}=2R \cdot sin\frac{A}{2}=2r \cdot tan\frac{A}{2}$$
+	$$a=2\sqrt{R^2-r^2}=2R \cdot sin\frac{A}{2}=2r \cdot tan\frac{A}{2}$$
 	\item 面积
-		$$S=\frac{nar}{2}=nr^2 \cdot tan\frac{A}{2}=\frac{nR^2}{2} \cdot sinA=\frac{na^2}{4 \cdot tan\frac{A}{2}}$$
+	$$S=\frac{nar}{2}=nr^2 \cdot tan\frac{A}{2}=\frac{nR^2}{2} \cdot sinA=\frac{na^2}{4 \cdot tan\frac{A}{2}}$$
 \end{enumerate}
 
 \subsubsection{圆}
 
 \begin{enumerate}
 	\item 弧长
-		$$l=rA$$
+	$$l=rA$$
 	\item 弦长
-		$$a=2\sqrt{2hr-h^2}=2r\cdot sin\frac{A}{2}$$
+	$$a=2\sqrt{2hr-h^2}=2r\cdot sin\frac{A}{2}$$
 	\item 弓形高
-		$$h=r-\sqrt{r^2-\frac{a^2}{4}}=r(1-cos\frac{A}{2})=\frac{1}{2} \cdot arctan\frac{A}{4}$$
+	$$h=r-\sqrt{r^2-\frac{a^2}{4}}=r(1-cos\frac{A}{2})=\frac{1}{2} \cdot arctan\frac{A}{4}$$
 	\item 扇形面积
-		$$S_1=\frac{rl}{2}=\frac{r^2A}{2}$$
+	$$S_1=\frac{rl}{2}=\frac{r^2A}{2}$$
 	\item 弓形面积
-		$$S_2=\frac{rl-a(r-h)}{2}=\frac{r^2}{2}(A-sinA)$$
+	$$S_2=\frac{rl-a(r-h)}{2}=\frac{r^2}{2}(A-sinA)$$
 \end{enumerate}
 
 \subsubsection{棱柱}
 
 \begin{enumerate}
 	\item 体积
-		$$V=Ah$$
-		$A$为底面积，$h$为高
+	$$V=Ah$$
+	$A$为底面积，$h$为高
 	\item 侧面积
-		$$S=lp$$
-		$l$为棱长，$p$为直截面周长
+	$$S=lp$$
+	$l$为棱长，$p$为直截面周长
 	\item 全面积
-		$$T=S+2A$$
+	$$T=S+2A$$
 \end{enumerate}
 
 \subsubsection{棱锥}
 
 \begin{enumerate}
 	\item 体积
-		$$V=Ah$$
-		$A$为底面积，$h$为高
+	$$V=Ah$$
+	$A$为底面积，$h$为高
 	\item 正棱锥侧面积
-		$$S=lp$$
-		$l$为棱长，$p$为直截面周长
+	$$S=lp$$
+	$l$为棱长，$p$为直截面周长
 	\item 正棱锥全面积
-		$$T=S+2A$$
+	$$T=S+2A$$
 \end{enumerate}
 
 \subsubsection{棱台}
 
 \begin{enumerate}
 	\item 体积
-		$$V=(A_1+A_2+\sqrt{A_1A_2}) \cdot \frac{h}{3}$$
-		$A_1,A_2$为上下底面积，$h$为高
+	$$V=(A_1+A_2+\sqrt{A_1A_2}) \cdot \frac{h}{3}$$
+	$A_1,A_2$为上下底面积，$h$为高
 	\item 正棱台侧面积
-		$$S=\frac{p_1+p_2}{2}l$$
-		$p_1,p_2$为上下底面周长，$l$为斜高
+	$$S=\frac{p_1+p_2}{2}l$$
+	$p_1,p_2$为上下底面周长，$l$为斜高
 	\item 正棱台全面积
-		$$T=S+A_1+A_2$$
+	$$T=S+A_1+A_2$$
 \end{enumerate}
 
 \subsubsection{圆柱}
 
 \begin{enumerate}
 	\item 侧面积
-		$$S=2\pi rh$$
+	$$S=2\pi rh$$
 	\item 全面积
-		$$T=2\pi r(h+r)$$
+	$$T=2\pi r(h+r)$$
 	\item 体积
-		$$V=\pi r^2h$$
+	$$V=\pi r^2h$$
 \end{enumerate}
 
 \subsubsection{圆锥}
 
 \begin{enumerate}
 	\item 母线
-		$$l=\sqrt{h^2+r^2}$$
+	$$l=\sqrt{h^2+r^2}$$
 	\item 侧面积
-		$$S=\pi rl$$
+	$$S=\pi rl$$
 	\item 全面积
-		$$T=\pi r(l+r)$$
+	$$T=\pi r(l+r)$$
 	\item 体积
-		$$V=\frac{\pi}{3} r^2h$$
+	$$V=\frac{\pi}{3} r^2h$$
 \end{enumerate}
 
 \subsubsection{圆台}
 
 \begin{enumerate}
 	\item 母线
-		$$l=\sqrt{h^2+(r_1-r_2)^2}$$
+	$$l=\sqrt{h^2+(r_1-r_2)^2}$$
 	\item 侧面积
-		$$S=\pi(r_1+r_2)l$$
+	$$S=\pi(r_1+r_2)l$$
 	\item 全面积
-		$$T=\pi r_1(l+r_1)+\pi r_2(l+r_2)$$
+	$$T=\pi r_1(l+r_1)+\pi r_2(l+r_2)$$
 	\item 体积
-		$$V=\frac{\pi}{3}(r_1^2+r_2^2+r_1r_2)h$$
+	$$V=\frac{\pi}{3}(r_1^2+r_2^2+r_1r_2)h$$
 \end{enumerate}
 
 \subsubsection{球}
 
 \begin{enumerate}
 	\item 全面积
-		$$T=4\pi r^2$$
+	$$T=4\pi r^2$$
 	\item 体积
-		$$V=\frac{4}{3}\pi r^3$$
+	$$V=\frac{4}{3}\pi r^3$$
 \end{enumerate}
 
 \subsubsection{球台}
 
 \begin{enumerate}
 	\item 侧面积
-		$$S=2\pi rh$$
+	$$S=2\pi rh$$
 	\item 全面积
-		$$T=\pi(2rh+r_1^2+r_2^2)$$
+	$$T=\pi(2rh+r_1^2+r_2^2)$$
 	\item 体积
-		$$V=\frac{\pi h[3(r_1^2+r_2^2)+h^2]}{6}$$
+	$$V=\frac{\pi h[3(r_1^2+r_2^2)+h^2]}{6}$$
 \end{enumerate}
 
 \subsubsection{球扇形}
 
 \begin{enumerate}
 	\item 全面积
-		$$T=\pi r(2h+r_0)$$
-		$h$为球冠高，$r_0$为球冠底面半径
+	$$T=\pi r(2h+r_0)$$
+	$h$为球冠高，$r_0$为球冠底面半径
 	\item 体积
-		$$V=\frac{2}{3}\pi r^2h$$
+	$$V=\frac{2}{3}\pi r^2h$$
 \end{enumerate}
 
 \subsection{立体几何公式}
@@ -733,18 +836,18 @@ $R$为外接圆半径，$r$为内切圆半径
 $U, V, W, u, v, w$是四面体的$6$条棱，$U, V, W$构成三角形，$(U, u), (V, v), (W, w)$互为对棱，
 则$$V = \frac{\sqrt{(s - 2a)(s - 2b)(s - 2c)(s - 2d)}}{192 uvw}$$
 其中$$\left\{\begin{array}{lll}
-        a & = & \sqrt{xYZ}, \\
-        b & = & \sqrt{yZX}, \\
-        c & = & \sqrt{zXY}, \\
-        d & = & \sqrt{xyz}, \\
-        s & = & a + b + c + d, \\ 
-        X & = & (w - U + v)(U + v + w), \\
-        x & = & (U - v + w)(v - w + U), \\
-        Y & = & (u - V + w)(V + w + u), \\
-        y & = & (V - w + u)(w - u + V), \\
-        Z & = & (v - W + u)(W + u + v), \\
-        z & = & (W - u + v)(u - v + W)
-    \end{array}\right.$$
+a & = & \sqrt{xYZ}, \\
+b & = & \sqrt{yZX}, \\
+c & = & \sqrt{zXY}, \\
+d & = & \sqrt{xyz}, \\
+s & = & a + b + c + d, \\ 
+X & = & (w - U + v)(U + v + w), \\
+x & = & (U - v + w)(v - w + U), \\
+Y & = & (u - V + w)(V + w + u), \\
+y & = & (V - w + u)(w - u + V), \\
+Z & = & (v - W + u)(W + u + v), \\
+z & = & (W - u + v)(u - v + W)
+\end{array}\right.$$
 
 %\subsection{常用数表}
 
