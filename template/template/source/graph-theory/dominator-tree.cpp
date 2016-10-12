@@ -73,41 +73,7 @@ void tarjan(){
     }
     idom[rdfn[1]]=0;
 }
- 
-int main(){
-    while(scanf("%d%d",&n,&m)==2){
-        for(int i=1;i<=n;i++){
-            G[i].clear();
-            rG[i].clear();
-            dom[i].clear();
-        }
-     
-        for(int i=1;i<=m;i++){
-            int u,v;
-            scanf("%d%d",&u,&v);
-            G[u].push_back(v);
-            rG[v].push_back(u);
-        }
-        init();
-        dfs(1);
-     
-        tarjan();
- 
-        static int vis[maxn];
-        memset(vis,0,sizeof vis);
-        int ans=0;
-        for(int i=2;i<=n;i++){
-            if(!vis[idom[i]]){
-                vis[idom[i]]=1;
-                ans++;
-            }
-        }
-        cout<<ans<<endl;
-        for(int i=1;i<=n;i++)
-            if(vis[i]){
-                ans--;
-                printf("%d%c",i," \n"[ans==0]);
-            }
-    }
-    return 0;
-}
+init();
+dfs(1);
+tarjan();
+

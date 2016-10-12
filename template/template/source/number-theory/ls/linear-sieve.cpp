@@ -1,3 +1,15 @@
+#include<bits/stdc++.h>
+using namespace std;
+const int maxn=1e5+5;
+typedef long long LL;
+int minp[maxn];
+int minpw[maxn];
+int p[maxn];
+int phi[maxn];
+int mu[maxn];
+
+int f[maxn];
+
 void sieve(){
 	f[1]=mu[1]=phi[1]=1;
 	for(int i=2;i<maxn;i++){
@@ -31,4 +43,21 @@ void sieve(){
 			}
 		}
 	}
+}
+
+int main(){	
+	sieve();
+	for(int i=1;i<=10;i++)
+		printf("%d%c",p[i]," \n"[i==10]);	
+	for(int i=1;i<=10;i++)
+		printf("%d%c",minp[i]," \n"[i==10]);	
+	for(int i=1;i<=10;i++)
+		printf("%d%c",minpw[i]," \n"[i==10]);	
+	for(int i=1;i<=10;i++)
+		printf("%d%c",phi[i]," \n"[i==10]);	
+	for(int i=1;i<=10;i++)
+		printf("%d%c",mu[i]," \n"[i==10]);	
+	for(int i=1;i<=10;i++)
+		printf("%d%c",f[i]," \n"[i==10]);	
+	return 0;
 }
