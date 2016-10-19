@@ -51,12 +51,11 @@ void Splay(int x){
 	int top = 0;
 	for (int  u = x; u; u = T[u].fa)
 		stack[++top] = u;
+	for (int i = top; i >= 1; i--)
+		Lazy_Down(stack[i]);
 	for (int i = 2; i <= top; i++)
 		if (T[stack[i]].c[0] == stack[i - 1]) fx[i] = 0;
 		else fx[i] = 1;
-	
-	for (int i = top; i >= 1; i--)
-		Lazy_Down(stack[i]);
 	
 	for (int i = 2; i <= top; i += 2){
 		if (i == top) Rotate(stack[i], fx[i]);
