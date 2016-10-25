@@ -42,6 +42,7 @@ void solve(int u){
         solve(root);
     }
 }
+All=n
 f[root=0]=n+1;
 makert(1,1);
 solve(root);
