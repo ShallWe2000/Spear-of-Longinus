@@ -23,3 +23,5 @@ namespace Reader {
 		return true;
 	}
 }
+Reader::getint(x);
+Reader::getint(y);
