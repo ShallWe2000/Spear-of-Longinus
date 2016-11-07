@@ -1,3 +1,5 @@
+#include<bits/stdc++.h>
+using namespace std;
 const int maxn=1e5+5;
 #define sz(x) (x?x->siz:0)
 struct Treap{
@@ -30,6 +32,23 @@ struct Treap{
 			rot(t,x>t->val);
 		else t->rz();
 	}
+	void del(node *&t,int x){
+		if(!t)return;
+		if(t->val==x){
+			if(t->s>1){t->s--;t->siz--;return;}
+			if(!t->c[0]||!t->c[1]){
+				if(!t->c[0])t=t->c[1];
+				else t=t->c[0];
+				return;
+			}
+			int d=t->c[0]->key<t->c[1]->key;
+			rot(t,d);
+			del(t,x);
+			return;
+		}
+		del(t->c[x>t->val],x);
+		t->rz();
+	}
 	int pre(node *t,int x){
 		if(!t)return INT_MIN;
 		int ans=pre(t->c[x>t->val],x);
@@ -59,4 +78,47 @@ struct Treap{
 		printf("%d ",t->val);
 		deb(t->c[1]);
 	}
+	void insert(int x){insert(root,x);}
+	void del(int x){del(root,x);}
+	int pre(int x){return pre(root,x);}
+	int nxt(int x){return nxt(root,x);}
+	int rank(int x){return rank(root,x);}
+	int kth(int x){return kth(root,x);}
+	void deb(){deb(root);puts("");}
 }T;
+int main(){
+    srand(12121);  
+    int m;  
+    scanf("%d",&m);
+    while(m--){  
+        int opt,x;  
+        scanf("%d",&opt);  
+        switch(opt){  
+            case 1:  
+                scanf("%d",&x);  
+                T.insert(x);  
+                break;  
+            case 2:  
+                scanf("%d",&x);  
+                T.del(x);  
+                break;  
+            case 3:  
+                scanf("%d",&x);  
+                printf("%d\n",T.rank(x)+1);  
+                break;  
+            case 4:               
+                scanf("%d",&x);  
+                printf("%d\n",T.kth(x));  
+                break;  
+            case 5:  
+                scanf("%d",&x);  
+                printf("%d\n",T.pre(x));  
+                break;  
+            case 6:  
+                scanf("%d",&x);  
+                printf("%d\n",T.nxt(x));  
+                break;    
+        }  
+    }  
+	return 0;
+}
