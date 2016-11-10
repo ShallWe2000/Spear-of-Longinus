@@ -19,6 +19,7 @@
 \usepackage{indentfirst}
 \usepackage[cache=false]{minted}
 \usepackage{fontspec}
+\usepackage{pdfpages}
 %代码高亮
 \geometry{margin=1in}
 \setmonofont{Consolas}
@@ -38,7 +39,7 @@
 }
 
 \title{代码库}
-\author{上海交通大学}
+\author{Spear of Longinus}
 \date{\today}
 
 \begin{document}
@@ -241,12 +242,23 @@
 
 \subsection{莫队算法}
 \cppcode{data-structure/mo-team.cpp}
+\subsection{树上在线莫队}
+\cppcode{data-structure/mo-teamontree.cpp}
 
 \subsection{整体二分}
 \cppcode{data-structure/binary-search.cpp}
 
 \subsection{树状数组kth}
 \cppcode{data-structure/fenwicktree.cpp}
+
+\subsection{虚树}
+\cppcode{data-structure/virtualtree.cpp}
+
+\subsection{点分治(zky)}
+\cppcode{data-structure/pointdivide.cpp}
+
+\subsection{元芳树}
+\cppcode{data-structure/yuanfang.cpp}
 
 
 \section{图论}
@@ -257,8 +269,8 @@
 
 %\subsection{双连通分量}
 
-\subsubsection{点双连通分量}
-\cppcode{graph-theory/point-two.cpp}
+\subsubsection{点双连通分量(lyx)}
+\cppcode{graph-theory/pointtwo.cpp}
 
 %\subsubsection{边双连通分量}
 
@@ -511,8 +523,11 @@ ORE性质：$$\forall x,y \in V \wedge (x,y) \notin E \ \ s.t. \ \ deg_x+deg_y \
 
 \section{其他}
 
-\subsection{斯坦那树}
+\subsection{斯坦纳树}
 \cppcode{miscellany/Steiner-Tree.cpp}
+
+\subsection{无敌的读入优化}
+\cppcode{miscellany/Reader.cpp}
 
 \subsection{最小树形图}
 \cppcode{miscellany/mintreegraph.cpp}
@@ -551,6 +566,10 @@ ORE性质：$$\forall x,y \in V \wedge (x,y) \notin E \ \ s.t. \ \ deg_x+deg_y \
 \subsection{基础模板}
 
 \javacode{template.java}
+
+
+\includepdf[pages={1-6}]{source/biginteger.pdf}
+\includepdf[pages={1-5}]{source/treemap.pdf}
 
 \section{gedit}
 

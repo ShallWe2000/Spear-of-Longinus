@@ -1,20 +1,13 @@
 struct node{
 	bool Rev;
-	int c[2], fa, Chain, Aux, Val;
+	int c[2], fa;
 }T[N];
 
-inline int Sum(int x){
-	return T[x].Chain ^ T[x].Aux;
-}
 
 inline void Rev(int x){
 	if (!x) return;
-	swap(T[x].c[0],T[x].c[1]);
+	swap(T[x].c[0], T[x].c[1]);
 	T[x].Rev ^= 1;
-}
-
-inline void Update(int x){
-	T[x].Chain = Sum(T[x].c[0]) ^ Sum(T[x].c[1]) ^ T[x].Val;
 }
 
 inline void Lazy_Down(int x){
@@ -22,92 +15,100 @@ inline void Lazy_Down(int x){
 	if (T[x].Rev) Rev(T[x].c[0]), Rev(T[x].c[1]), T[x].Rev = 0;
 }
 
-inline void Rotate(int x,int c){
-	int fa = T[x].fa, ft = T[fa].fa;
-	T[x].fa = ft, T[fa].fa = x;
-	if (ft) T[ft].c[T[ft].c[1] == fa] = x;
-	T[fa].c[c] = T[x].c[!c];
-	if (T[x].c[!c]) T[T[x].c[!c]].fa = fa;
-	T[x].c[!c] = fa;
-	if (Par[fa]) Par[x] = Par[fa], Par[fa] = 0;
-	Update(fa);
+void Rotate(int x, int c){
+	int y = T[x].c[c];
+	int z = T[y].c[1 - c];
+	
+	if (T[x].fa){
+		if (T[T[x].fa].c[0] == x) T[T[x].fa].c[0] = y;
+		else T[T[x].fa].c[1] = y;
+	}
+	
+	T[z].fa = x; T[x].c[c] = z;
+	T[y].fa = T[x].fa; T[x].fa = y; T[y].c[1 - c] = x;
+	
+	//Update(x);
+	//Update(y);
 }
 
-inline void Splay(int x){
+int stack[N], fx[N];
+
+void Splay(int x){
 	int top = 0;
-	for (int u = x; u; u = T[u].fa) Stack[++top] = u;
+	for (int  u = x; u; u = T[u].fa)
+		stack[++top] = u;
+	for (int i = top; i >= 1; i--)
+		Lazy_Down(stack[i]);
+	for (int i = 2; i <= top; i++)
+		if (T[stack[i]].c[0] == stack[i - 1]) fx[i] = 0;
+		else fx[i] = 1;
 	
-	for( ; top; top--) Lazy_Down(Stack[top]);
-	
-	for( ; T[x].fa; ){
-		int fa = T[x].fa, ft = T[fa].fa;
-		if (!ft) Rotate(x, T[fa].c[1] == x); else
-		{
-			if (T[fa].c[1] == x)
-			{
-				if (T[ft].c[1] == fa) Rotate(fa, 1),Rotate(x, 1);
-				else Rotate(x, 1),Rotate(x, 0);
-			} else
-				if (T[ft].c[0] == fa) Rotate(fa, 0),Rotate(x, 0);
-				else Rotate(x, 0),Rotate(x, 1);
+	for (int i = 2; i <= top; i += 2){
+		if (i == top) Rotate(stack[i], fx[i]);
+		else {
+			if (fx[i] == fx[i + 1]){
+				Rotate(stack[i + 1], fx[i + 1]);
+				Rotate(stack[i], fx[i]);
+			} else {
+				Rotate(stack[i], fx[i]);
+				Rotate(stack[i + 1], fx[i + 1]);
+			}
 		}
 	}
-	Update(x);
+	
+	if (x != stack[top]) Par[x] = Par[stack[top]], Par[stack[top]] = 0;
 }
 
 inline int Access(int u){
-	
 	int Nxt = 0;
-	
 	while (u){
 		Splay(u);
 		if (T[u].c[1]){
 			T[T[u].c[1]].fa = 0;
 			Par[T[u].c[1]] = u;
-			T[u].Aux ^= Sum(T[u].c[1]);
 		}
 		T[u].c[1] = Nxt;
 		if (Nxt){
 			T[Nxt].fa = u;
 			Par[Nxt] = 0;
-			T[u].Aux ^= Sum(Nxt);
 		}
-		Update(u);
+		//Update(u)
 		Nxt = u;
 		u = Par[u];
 	}
-	
 	return Nxt;
-	
 }
 
 inline void Root(int u){
-	Rev(Access(u));
-}
-
-inline void Mark(int x, int col){
-	Access(x);
-	Splay(x);
-	T[x].Val ^= col;
-	Update(x);
+	Access(u);
+	Splay(u);
+	Rev(u);
 }
 
 inline void Link(int u, int v){
-	Root(v);
-	Access(v);
-	Access(u);
-	Splay(v);
-	Splay(u);
-	Par[v] = u;
-	T[u].Aux ^= Sum(v);
-	Access(v);
+	Root(u);
+	Par[u] = v;
 }
 
 inline void Cut(int u, int v){
-	Root(v);
 	Access(u);
-	Splay(u);
-	T[T[u].c[0]].fa = 0;
-	T[u].c[0] = 0;
-	Update(u);
+	Splay(v);
+	if (Par[v] != u){
+		swap(u, v);
+		Access(u);
+		Splay(v);
+	}
+	Par[v] = 0;
+}
+
+inline int Find_Root(int x){
+	Access(x);
+	Splay(x);
+	
+	int y = x;
+	while (T[y].c[0]){
+		Lazy_Down(y);
+		y = T[y].c[0];
+	}
+	return y;
 }
