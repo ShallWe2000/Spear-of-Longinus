@@ -1,3 +1,4 @@
+///求割点，割点向每个点双连通分量连边
 void Dfs(int x, int lst){
 	dfn[x] = ++dfc;
 	low[x] = dfn[x];

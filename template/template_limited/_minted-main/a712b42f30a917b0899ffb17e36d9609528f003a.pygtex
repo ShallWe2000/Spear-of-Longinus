@@ -1,4 +1,5 @@
 \begin{Verbatim}[commandchars=\\\{\},codes={\catcode`\$=3\catcode`\^=7\catcode`\_=8}]
+\PYGxcode{c+c1}{///求割点，割点向每个点双连通分量连边}
 \PYGxcode{k+kt}{void} \PYGxcode{n+nf}{Dfs}\PYGxcode{p}{(}\PYGxcode{k+kt}{int} \PYGxcode{n}{x}\PYGxcode{p}{,} \PYGxcode{k+kt}{int} \PYGxcode{n}{lst}\PYGxcode{p}{)\PYGxcodeZob{}}
 	\PYGxcode{n}{dfn}\PYGxcode{p}{[}\PYGxcode{n}{x}\PYGxcode{p}{]} \PYGxcode{o}{=} \PYGxcode{o}{++}\PYGxcode{n}{dfc}\PYGxcode{p}{;}
 	\PYGxcode{n}{low}\PYGxcode{p}{[}\PYGxcode{n}{x}\PYGxcode{p}{]} \PYGxcode{o}{=} \PYGxcode{n}{dfn}\PYGxcode{p}{[}\PYGxcode{n}{x}\PYGxcode{p}{];}

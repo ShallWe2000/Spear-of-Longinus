@@ -1,8 +1,4 @@
 \begin{Verbatim}[commandchars=\\\{\},codes={\catcode`\$=3\catcode`\^=7\catcode`\_=8}]
-\PYGxcode{k}{struct} \PYGxcode{n}{line}\PYGxcode{p}{\PYGxcodeZob{}}
-	\PYGxcode{n}{point} \PYGxcode{n}{p}\PYGxcode{p}{,}\PYGxcode{n}{v}\PYGxcode{p}{;}
-\PYGxcode{p}{\PYGxcodeZcb{};}
-\PYGxcode{n}{point} \PYGxcode{n+nf}{Rev}\PYGxcode{p}{(}\PYGxcode{n}{point} \PYGxcode{n}{v}\PYGxcode{p}{)\PYGxcodeZob{}}\PYGxcode{k}{return} \PYGxcode{n}{point}\PYGxcode{p}{(}\PYGxcode{o}{\PYGxcodeZhy{}}\PYGxcode{n}{v}\PYGxcode{p}{.}\PYGxcode{n}{y}\PYGxcode{p}{,}\PYGxcode{n}{v}\PYGxcode{p}{.}\PYGxcode{n}{x}\PYGxcode{p}{);\PYGxcodeZcb{}}
 \PYGxcode{n}{point} \PYGxcode{k}{operator}\PYGxcode{o}{*}\PYGxcode{p}{(}\PYGxcode{n}{line} \PYGxcode{n}{A}\PYGxcode{p}{,}\PYGxcode{n}{line} \PYGxcode{n}{B}\PYGxcode{p}{)\PYGxcodeZob{}}
 	\PYGxcode{n}{point} \PYGxcode{n}{u}\PYGxcode{o}{=}\PYGxcode{n}{B}\PYGxcode{p}{.}\PYGxcode{n}{p}\PYGxcode{o}{\PYGxcodeZhy{}}\PYGxcode{n}{A}\PYGxcode{p}{.}\PYGxcode{n}{p}\PYGxcode{p}{;}
 	\PYGxcode{k+kt}{double} \PYGxcode{n}{t}\PYGxcode{o}{=}\PYGxcode{p}{(}\PYGxcode{n}{B}\PYGxcode{p}{.}\PYGxcode{n}{v}\PYGxcode{o}{*}\PYGxcode{n}{u}\PYGxcode{p}{)}\PYGxcode{o}{/}\PYGxcode{p}{(}\PYGxcode{n}{B}\PYGxcode{p}{.}\PYGxcode{n}{v}\PYGxcode{o}{*}\PYGxcode{n}{A}\PYGxcode{p}{.}\PYGxcode{n}{v}\PYGxcode{p}{);}
@@ -19,9 +15,6 @@
 	\PYGxcode{n}{line} \PYGxcode{n}{BCO}\PYGxcode{o}{=}\PYGxcode{p}{(}\PYGxcode{n}{line}\PYGxcode{p}{)\PYGxcodeZob{}(}\PYGxcode{n}{c}\PYGxcode{o}{+}\PYGxcode{n}{b}\PYGxcode{p}{)}\PYGxcode{o}{/}\PYGxcode{l+m+mi}{2}\PYGxcode{p}{,}\PYGxcode{n}{Rev}\PYGxcode{p}{(}\PYGxcode{n}{b}\PYGxcode{o}{\PYGxcodeZhy{}}\PYGxcode{n}{c}\PYGxcode{p}{)\PYGxcodeZcb{};}
 	\PYGxcode{k}{return} \PYGxcode{n}{ABO}\PYGxcode{o}{*}\PYGxcode{n}{BCO}\PYGxcode{p}{;}
 \PYGxcode{p}{\PYGxcodeZcb{}}
-\PYGxcode{k+kt}{int} \PYGxcode{n}{main}\PYGxcode{p}{()\PYGxcodeZob{}}
-	\PYGxcode{n}{scanf}\PYGxcode{p}{(}\PYGxcode{l+s}{\PYGxcodeZdq{}\PYGxcodeZpc{}d\PYGxcodeZdq{}}\PYGxcode{p}{,}\PYGxcode{o}{\PYGxcodeZam{}}\PYGxcode{n}{n}\PYGxcode{p}{);}
-	\PYGxcode{k}{for}\PYGxcode{p}{(}\PYGxcode{k+kt}{int} \PYGxcode{n}{i}\PYGxcode{o}{=}\PYGxcode{l+m+mi}{1}\PYGxcode{p}{;}\PYGxcode{n}{i}\PYGxcode{o}{\PYGxcodeZlt{}=}\PYGxcode{n}{n}\PYGxcode{p}{;}\PYGxcode{n}{i}\PYGxcode{o}{++}\PYGxcode{p}{)}\PYGxcode{n}{scanf}\PYGxcode{p}{(}\PYGxcode{l+s}{\PYGxcodeZdq{}\PYGxcodeZpc{}lf\PYGxcodeZpc{}lf\PYGxcodeZdq{}}\PYGxcode{p}{,}\PYGxcode{o}{\PYGxcodeZam{}}\PYGxcode{n}{p}\PYGxcode{p}{[}\PYGxcode{n}{i}\PYGxcode{p}{].}\PYGxcode{n}{x}\PYGxcode{p}{,}\PYGxcode{o}{\PYGxcodeZam{}}\PYGxcode{n}{p}\PYGxcode{p}{[}\PYGxcode{n}{i}\PYGxcode{p}{].}\PYGxcode{n}{y}\PYGxcode{p}{);}
 	\PYGxcode{n}{random\PYGxcodeZus{}shuffle}\PYGxcode{p}{(}\PYGxcode{n}{p}\PYGxcode{o}{+}\PYGxcode{l+m+mi}{1}\PYGxcode{p}{,}\PYGxcode{n}{p}\PYGxcode{o}{+}\PYGxcode{l+m+mi}{1}\PYGxcode{o}{+}\PYGxcode{n}{n}\PYGxcode{p}{);}
 	\PYGxcode{n}{O}\PYGxcode{o}{=}\PYGxcode{n}{p}\PYGxcode{p}{[}\PYGxcode{l+m+mi}{1}\PYGxcode{p}{];}\PYGxcode{n}{r}\PYGxcode{o}{=}\PYGxcode{l+m+mi}{0}\PYGxcode{p}{;}
 	\PYGxcode{k}{for}\PYGxcode{p}{(}\PYGxcode{k+kt}{int} \PYGxcode{n}{i}\PYGxcode{o}{=}\PYGxcode{l+m+mi}{2}\PYGxcode{p}{;}\PYGxcode{n}{i}\PYGxcode{o}{\PYGxcodeZlt{}=}\PYGxcode{n}{n}\PYGxcode{p}{;}\PYGxcode{n}{i}\PYGxcode{o}{++}\PYGxcode{p}{)\PYGxcodeZob{}}
@@ -35,7 +28,5 @@
 				\PYGxcode{n}{O}\PYGxcode{o}{=}\PYGxcode{n}{get}\PYGxcode{p}{(}\PYGxcode{n}{p}\PYGxcode{p}{[}\PYGxcode{n}{i}\PYGxcode{p}{],}\PYGxcode{n}{p}\PYGxcode{p}{[}\PYGxcode{n}{j}\PYGxcode{p}{],}\PYGxcode{n}{p}\PYGxcode{p}{[}\PYGxcode{n}{k}\PYGxcode{p}{]);}\PYGxcode{n}{r}\PYGxcode{o}{=}\PYGxcode{n}{dis}\PYGxcode{p}{(}\PYGxcode{n}{O}\PYGxcode{p}{,}\PYGxcode{n}{p}\PYGxcode{p}{[}\PYGxcode{n}{i}\PYGxcode{p}{]);}
 			\PYGxcode{p}{\PYGxcodeZcb{}}
 		\PYGxcode{p}{\PYGxcodeZcb{}}
-	\PYGxcode{p}{\PYGxcodeZcb{}}\PYGxcode{n}{printf}\PYGxcode{p}{(}\PYGxcode{l+s}{\PYGxcodeZdq{}\PYGxcodeZpc{}.2lf \PYGxcodeZpc{}.2lf \PYGxcodeZpc{}.2lf}\PYGxcode{l+s+se}{\PYGxcodeZbs{}n}\PYGxcode{l+s}{\PYGxcodeZdq{}}\PYGxcode{p}{,}\PYGxcode{n}{O}\PYGxcode{p}{.}\PYGxcode{n}{x}\PYGxcode{p}{,}\PYGxcode{n}{O}\PYGxcode{p}{.}\PYGxcode{n}{y}\PYGxcode{p}{,}\PYGxcode{n}{r}\PYGxcode{p}{);}
-	\PYGxcode{k}{return} \PYGxcode{l+m+mi}{0}\PYGxcode{p}{;}
-\PYGxcode{p}{\PYGxcodeZcb{}}\PYGxcode{n}{s} 
+	\PYGxcode{p}{\PYGxcodeZcb{}}
 \end{Verbatim}
